@@ -10,7 +10,24 @@ weatherButton.addEventListener('click', () => {
 });
 
 //async await
-async function getCityWeather(city) {
+// async function getCityWeather(city) {
+//   city = city.split(' ').length > 1 ? city.split(' ').join('+') : city;
+
+//   const url =
+//     'http://api.openweathermap.org/data/2.5/weather?APPID=' +
+//     API_WEATHER_KEY +
+//     '&q=' +
+//     city +
+//     '&units=imperial ';
+
+//   const res = await fetch(url);
+//   const data = await res.json();
+//   console.log(data);
+//   displayWeather(data);
+// }
+
+//.then
+function getCityWeather(city) {
   city = city.split(' ').length > 1 ? city.split(' ').join('+') : city;
 
   const url =
@@ -20,10 +37,14 @@ async function getCityWeather(city) {
     city +
     '&units=imperial ';
 
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(data);
-  displayWeather(data);
+  //   fetch(url).then(res => {
+  //     res.json().then(data => displayWeather(data));
+  //   });
+  fetch(url).then(function (res) {
+    res.json().then(function (data) {
+      displayWeather(data);
+    });
+  });
 }
 
 function displayWeather(data) {
